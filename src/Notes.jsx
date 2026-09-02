@@ -83,7 +83,7 @@ function Notes() {
   setError("");
 
   try {
-    const response = await fetch("http://localhost:5000/api/summarize", {
+    const response = await fetch("https://studyflow-fxwq.onrender.com/api/summarize", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -123,7 +123,7 @@ async function generateFlashcards() {
 
   try {
     const response = await fetch(
-      "http://localhost:5000/api/flashcards",
+      "https://studyflow-fxwq.onrender.com/api/flashcards",
       {
         method: "POST",
         headers: {
@@ -175,7 +175,7 @@ async function generateQuiz() {
 
   try {
     const response = await fetch(
-      "http://localhost:5000/api/quiz",
+      "https://studyflow-fxwq.onrender.com/api/quiz",
       {
         method: "POST",
         headers: {
