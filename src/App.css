@@ -1,0 +1,147 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f4f7ff;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.login-card {
+  width: 400px;
+  padding: 40px;
+  background: white;
+  border-radius: 22px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.logo {
+  font-size: 48px;
+  margin-bottom: 8px;
+}
+
+.login-card h1 {
+  margin: 0;
+  font-size: 32px;
+  color: #222;
+}
+
+.welcome {
+  font-size: 20px;
+  margin: 12px 0 5px;
+  font-weight: bold;
+}
+
+.subtitle {
+  color: #777;
+  margin-bottom: 30px;
+}
+
+form {
+  text-align: left;
+}
+
+form > label {
+  display: block;
+  margin-bottom: 7px;
+  font-weight: bold;
+  color: #333;
+}
+
+input {
+  font-family: inherit;
+}
+
+input[type="email"],
+.password-box input {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.password-box {
+  position: relative;
+}
+
+.password-box input {
+  padding-right: 45px;
+}
+
+.show-password {
+  position: absolute;
+  right: 8px;
+  top: 5px;
+  width: 38px;
+  padding: 8px;
+  background: transparent;
+  color: #555;
+  border: none;
+  font-size: 16px;
+}
+
+.show-password:hover {
+  background: transparent;
+}
+
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+  font-size: 13px;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #666;
+}
+
+.remember input {
+  width: auto;
+  margin: 0;
+}
+
+.forgot {
+  color: #667eea;
+  cursor: pointer;
+}
+
+.login-button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #667eea;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background: #5568d9;
+}
+
+.signup {
+  margin-top: 25px;
+  color: #777;
+  font-size: 14px;
+}
+
+.signup span {
+  color: #667eea;
+  font-weight: bold;
+  cursor: pointer;
+}

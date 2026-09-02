@@ -1,0 +1,96 @@
+.revision-page {
+  padding: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.revision-header {
+  margin-bottom: 35px;
+}
+
+.revision-header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.revision-header p {
+  color: #666;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.revision-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.revision-card {
+  background: white;
+  border-radius: 18px;
+  padding: 25px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  border: 2px solid #eef0ff;
+}
+
+.revision-icon {
+  font-size: 32px;
+}
+
+.revision-card h2 {
+  font-size: 18px;
+  margin: 15px 0 5px;
+}
+
+.revision-number {
+  font-size: 38px;
+  font-weight: bold;
+  margin: 10px 0 0;
+}
+
+.revision-card p {
+  color: #777;
+}
+
+.study-next-text {
+  line-height: 1.6;
+  margin-top: 15px;
+}
+
+.topics-section {
+  margin-top: 40px;
+}
+
+.topics-section h2 {
+  margin-bottom: 20px;
+}
+
+.empty-revision {
+  background: white;
+  border-radius: 18px;
+  padding: 50px;
+  text-align: center;
+  border: 2px dashed #ddd;
+}
+
+.empty-revision div {
+  font-size: 45px;
+}
+
+.empty-revision h3 {
+  margin: 15px 0 5px;
+}
+
+.empty-revision p {
+  color: #777;
+}
+
+@media (max-width: 800px) {
+  .revision-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .revision-page {
+    padding: 20px;
+  }
+}
