@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createWorker } from "tesseract.js";
 import "./Notes.css";
 
-function Notes() {
+function Notes({ onBack }) {
   const [fileName, setFileName] = useState("");
   const [image, setImage] = useState(null);
   const [text, setText] = useState("");
@@ -265,6 +265,13 @@ function previousFlashcard() {
 }
   return (
     <div className="notes-page">
+
+      <button
+  className="back-button"
+  onClick={onBack}
+>
+  ← Dashboard
+</button>
 
       <div className="notes-header">
         <h1>📚 Smart Notes</h1>

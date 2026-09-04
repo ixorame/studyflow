@@ -408,3 +408,25 @@
   background: #ccc;
   cursor: not-allowed;
 }
+
+.back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 9999;
+
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+
+  background: #667eea;
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  opacity: 0.9;
+}
