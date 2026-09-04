@@ -1,15 +1,56 @@
+import { useState } from "react";
 import "./Revision.css";
 
-function Revision() {
+function Revision({ onBack }) {
+  const [subjects] = useState(() => {
+    const savedSubjects = localStorage.getItem("studyflowSubjects");
+
+    if (savedSubjects) {
+      return JSON.parse(savedSubjects);
+    }
+
+    return [];
+  });
+
+  const allTopics = subjects.flatMap((subject) =>
+    subject.portions.map((portion) => ({
+      ...portion,
+      subject: subject.name,
+      examDate: subject.examDate,
+    }))
+  );
+
+  const studiedTopics = allTopics.filter(
+    (topic) => topic.completed
+  );
+
+  const topicsToRevise = allTopics.filter(
+    (topic) => !topic.completed
+  );
+
+  const studyNext = topicsToRevise.length > 0
+    ? topicsToRevise[0]
+    : null;
+
   return (
     <div className="revision-page">
 
       <div className="revision-header">
+
+        <button
+          className="back-button"
+          onClick={onBack}
+        >
+          ← Dashboard
+        </button>
+
         <h1>🧠 My Revision</h1>
+
         <p>
           Keep track of what you have studied and
           what you should revise next.
         </p>
+
       </div>
 
       <div className="revision-grid">
@@ -22,7 +63,7 @@ function Revision() {
           <h2>Topics Studied</h2>
 
           <p className="revision-number">
-            0
+            {studiedTopics.length}
           </p>
 
           <p>
@@ -38,7 +79,7 @@ function Revision() {
           <h2>Needs Revision</h2>
 
           <p className="revision-number">
-            0
+            {topicsToRevise.length}
           </p>
 
           <p>
@@ -53,9 +94,22 @@ function Revision() {
 
           <h2>Study Next</h2>
 
-          <p className="study-next-text">
-            Upload your notes to get started.
-          </p>
+          {studyNext ? (
+            <>
+              <p className="study-next-text">
+                {studyNext.name}
+              </p>
+
+              <small>
+                {studyNext.subject}
+              </small>
+            </>
+          ) : (
+            <p className="study-next-text">
+              🎉 All topics completed!
+            </p>
+          )}
+
         </div>
 
       </div>
@@ -64,15 +118,84 @@ function Revision() {
 
         <h2>📖 Your Topics</h2>
 
-        <div className="empty-revision">
-          <div>📚</div>
+        {subjects.length === 0 ? (
 
-          <h3>No topics yet</h3>
+          <div className="empty-revision">
+            <div>📚</div>
 
-          <p>
-            Your studied topics will appear here.
-          </p>
-        </div>
+            <h3>No topics yet</h3>
+
+            <p>
+              Add exams and portions in the Exam
+              Tracker to see them here.
+            </p>
+          </div>
+
+        ) : (
+
+          <div className="revision-topics-list">
+
+            {subjects.map((subject) => (
+
+              <div
+                className="revision-subject"
+                key={subject.name}
+              >
+
+                <div className="revision-subject-header">
+                  <h3>📚 {subject.name}</h3>
+
+                  <span>
+                    {subject.portions.filter(
+                      (portion) => portion.completed
+                    ).length}
+                    /
+                    {subject.portions.length}
+                  </span>
+                </div>
+
+                <div className="revision-portions">
+
+                  {subject.portions.map((portion) => (
+
+                    <div
+                      className={`revision-topic ${
+                        portion.completed
+                          ? "topic-completed"
+                          : "topic-pending"
+                      }`}
+                      key={portion.name}
+                    >
+
+                      <span>
+                        {portion.completed
+                          ? "✅"
+                          : "⚠️"}
+                      </span>
+
+                      <span>
+                        {portion.name}
+                      </span>
+
+                      <span className="topic-status">
+                        {portion.completed
+                          ? "Studied"
+                          : "Needs revision"}
+                      </span>
+
+                    </div>
+
+                  ))}
+
+                </div>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        )}
 
       </div>
 
