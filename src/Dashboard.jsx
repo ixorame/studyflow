@@ -5,6 +5,7 @@ function Dashboard({
   onOpenNotes,
   onOpenRevision,
   onOpenTracker,
+  onOpenTutor,
 }) {
   return (
     <div className="dashboard">
@@ -28,7 +29,7 @@ function Dashboard({
             📊 Tracker
           </button>
 
-          <button>
+          <button onClick={onOpenTutor}>
             🤖 AI Tutor
           </button>
         </nav>

@@ -95,20 +95,24 @@ function Revision({ onBack }) {
           <h2>Study Next</h2>
 
           {studyNext ? (
-            <>
-              <p className="study-next-text">
-                {studyNext.name}
-              </p>
+  <>
+    <p className="study-next-text">
+      {studyNext.name}
+    </p>
 
-              <small>
-                {studyNext.subject}
-              </small>
-            </>
-          ) : (
-            <p className="study-next-text">
-              🎉 All topics completed!
-            </p>
-          )}
+    <small>
+      {studyNext.subject}
+    </small>
+  </>
+) : subjects.length === 0 ? (
+  <p className="study-next-text">
+    Add exams and portions in Tracker to get started.
+  </p>
+) : (
+  <p className="study-next-text">
+    🎉 All topics completed!
+  </p>
+)}
 
         </div>
 

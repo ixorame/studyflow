@@ -5,6 +5,7 @@ import Signup from "./Signup";
 import "./App.css";
 import Revision from "./Revision";
 import Tracker from "./Tracker";
+import Tutor from "./Tutor";
 
 function App() {
   const [page, setPage] = useState("login");
@@ -57,12 +58,21 @@ if (currentPage === "tracker") {
   );
 }
 
+if (currentPage === "tutor") {
+  return (
+    <Tutor
+      onBack={() => setCurrentPage("dashboard")}
+    />
+  );
+}
+
   return (
   <Dashboard
     user={user}
     onOpenNotes={() => setCurrentPage("notes")}
     onOpenRevision={() => setCurrentPage("revision")}
     onOpenTracker={() => setCurrentPage("tracker")}
+    onOpenTutor={() => setCurrentPage("tutor")}
   />
 );
 }

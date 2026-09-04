@@ -254,6 +254,53 @@ for (const question of quiz) {
     });
   }
 });
+// AI Tutor
+app.post("/api/tutor", async (req, res) => {
+  console.log("Received tutor request");
+
+  try {
+    const { question } = req.body;
+
+    if (!question) {
+      return res.status(400).json({
+        error: "No question was provided.",
+      });
+    }
+
+    const response = await ai.models.generateContent({
+      model: "gemini-3.6-flash",
+
+      contents: `You are StudyFlow AI Tutor.
+
+You are helping an 8th standard student.
+
+Answer the student's question in a friendly and simple way.
+
+Rules:
+- Use language suitable for an 8th standard student.
+- Explain difficult words simply.
+- Keep the answer clear and concise.
+- Use examples when helpful.
+- If the question is about school subjects, explain step by step.
+- Do not make up facts.
+
+STUDENT QUESTION:
+
+${question}`,
+    });
+
+    res.json({
+      answer: response.text,
+    });
+
+  } catch (error) {
+    console.error("TUTOR ERROR:", error);
+
+    res.status(500).json({
+      error: error.message || "Tutor request failed.",
+    });
+  }
+});
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, "0.0.0.0", () => {
