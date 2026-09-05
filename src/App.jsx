@@ -2,10 +2,10 @@ import { useState } from "react";
 import Dashboard from "./Dashboard";
 import Notes from "./Notes";
 import Signup from "./Signup";
-import "./App.css";
 import Revision from "./Revision";
 import Tracker from "./Tracker";
 import Tutor from "./Tutor";
+import "./App.css";
 
 function App() {
   const [page, setPage] = useState("login");
@@ -32,52 +32,34 @@ function App() {
     setPage("dashboard");
   }
 
-  // Show Dashboard
   if (page === "dashboard") {
-if (currentPage === "notes") {
-  return (
-    <Notes
-      onBack={() => setCurrentPage("dashboard")}
-    />
-  );
-}
+    if (currentPage === "notes") {
+      return <Notes onBack={() => setCurrentPage("dashboard")} />;
+    }
 
-if (currentPage === "revision") {
-  return (
-    <Revision
-      onBack={() => setCurrentPage("dashboard")}
-    />
-  );
-}
+    if (currentPage === "revision") {
+      return <Revision onBack={() => setCurrentPage("dashboard")} />;
+    }
 
-if (currentPage === "tracker") {
-  return (
-    <Tracker
-      onBack={() => setCurrentPage("dashboard")}
-    />
-  );
-}
+    if (currentPage === "tracker") {
+      return <Tracker onBack={() => setCurrentPage("dashboard")} />;
+    }
 
-if (currentPage === "tutor") {
-  return (
-    <Tutor
-      onBack={() => setCurrentPage("dashboard")}
-    />
-  );
-}
+    if (currentPage === "tutor") {
+      return <Tutor onBack={() => setCurrentPage("dashboard")} />;
+    }
 
-  return (
-  <Dashboard
-    user={user}
-    onOpenNotes={() => setCurrentPage("notes")}
-    onOpenRevision={() => setCurrentPage("revision")}
-    onOpenTracker={() => setCurrentPage("tracker")}
-    onOpenTutor={() => setCurrentPage("tutor")}
-  />
-);
-}
+    return (
+      <Dashboard
+        user={user}
+        onOpenNotes={() => setCurrentPage("notes")}
+        onOpenRevision={() => setCurrentPage("revision")}
+        onOpenTracker={() => setCurrentPage("tracker")}
+        onOpenTutor={() => setCurrentPage("tutor")}
+      />
+    );
+  }
 
-  // Show Signup
   if (page === "signup") {
     return (
       <Signup
@@ -87,87 +69,134 @@ if (currentPage === "tutor") {
     );
   }
 
-  // Show Login
   return (
     <div className="login-page">
+      <main className="login-layout">
+        <section className="login-intro">
+          <div className="intro-brand">
+            <span className="intro-logo">📚</span>
+            <span>StudyFlow</span>
+          </div>
 
-      <div className="login-card">
+          <div className="intro-content">
+            <p className="intro-tag">STUDY WITH A PLAN</p>
 
-        <div className="logo">📚</div>
+            <h1>
+              Make every
+              <br />
+              study session count.
+            </h1>
 
-        <h1>StudyFlow</h1>
+            <p className="intro-description">
+              Keep your notes, revision, exams and study goals together in one
+              simple space.
+            </p>
 
-        <p className="welcome">
-          Welcome back!
-        </p>
+            <div className="intro-features">
+              <div className="intro-feature">
+                <span>✓</span>
+                <p>
+                  <strong>Smart Notes</strong>
+                  Turn handwritten notes into study material.
+                </p>
+              </div>
 
-        <p className="subtitle">
-          Learn smarter. Study better.
-        </p>
+              <div className="intro-feature">
+                <span>✓</span>
+                <p>
+                  <strong>Exam Tracker</strong>
+                  Stay prepared with a clear revision plan.
+                </p>
+              </div>
 
-        <form onSubmit={handleLogin}>
+              <div className="intro-feature">
+                <span>✓</span>
+                <p>
+                  <strong>AI Tutor</strong>
+                  Get quick, simple help when you are stuck.
+                </p>
+              </div>
+            </div>
+          </div>
 
-          <label>Email</label>
+          <p className="intro-footer">Built for focused students.</p>
+        </section>
 
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-          />
+        <section className="login-panel">
+          <div className="login-card">
+            <div className="mobile-brand">
+              <span>📚</span>
+              StudyFlow
+            </div>
 
-          <label>Password</label>
+            <p className="form-eyebrow">WELCOME BACK</p>
+            <h2>Sign in to continue</h2>
+            <p className="subtitle">
+              Pick up where you left off with your study plan.
+            </p>
 
-          <div className="password-box">
+            <form onSubmit={handleLogin}>
+              <label htmlFor="email">Email address</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              />
 
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
+              <label htmlFor="password">Password</label>
+              <div className="password-box">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+
+                <button
+                  type="button"
+                  className="show-password"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+              </div>
+
+              <div className="login-options">
+                <label className="remember">
+                  <input type="checkbox" />
+                  Remember me
+                </label>
+
+                <button type="button" className="forgot">
+                  Forgot password?
+                </button>
+              </div>
+
+              <button type="submit" className="login-button">
+                Sign in <span>→</span>
+              </button>
+            </form>
+
+            <div className="signup-divider">
+              <span />
+              <p>New to StudyFlow?</p>
+              <span />
+            </div>
 
             <button
               type="button"
-              className="show-password"
-              onClick={() => setShowPassword(!showPassword)}
+              className="create-account-button"
+              onClick={() => setPage("signup")}
             >
-              {showPassword ? "🙈" : "👁️"}
+              Create an account
             </button>
-
           </div>
-
-          <div className="login-options">
-
-            <label className="remember">
-              <input type="checkbox" />
-              Remember me
-            </label>
-
-            <span className="forgot">
-              Forgot password?
-            </span>
-
-          </div>
-
-          <button
-            type="submit"
-            className="login-button"
-          >
-            Login
-          </button>
-
-        </form>
-
-        <p className="signup">
-          Don't have an account?
-          <span onClick={() => setPage("signup")}>
-            {" "}Sign up
-          </span>
-        </p>
-
-      </div>
-
+        </section>
+      </main>
     </div>
   );
 }

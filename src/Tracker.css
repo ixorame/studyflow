@@ -1,202 +1,89 @@
 .tracker-page {
-  padding: 40px;
   max-width: 1100px;
+  min-height: 100vh;
   margin: 0 auto;
+  padding: 40px;
+  background: #f0fdf4;
+  color: #16351f;
+  font-family: Arial, sans-serif;
 }
 
 .tracker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
   margin-bottom: 30px;
 }
 
 .tracker-header h1 {
   margin: 0;
+  color: #166534;
   font-size: 32px;
 }
 
-.tracker-header {
-  margin-bottom: 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-
-.subjects-list {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-}
-
-.subject-card {
-  background: white;
-  border-radius: 20px;
-  padding: 28px;
-  border: 2px solid #eef0ff;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-}
-
-.subject-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.subject-top h2 {
-  margin: 0 0 8px;
-  font-size: 24px;
-}
-
-.subject-top p {
-  margin: 0;
-  color: #777;
-}
-
-.days-left {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #f0f2ff;
-  padding: 12px 20px;
-  border-radius: 14px;
-}
-
-.days-left strong {
-  font-size: 28px;
-}
-
-.days-left span {
-  font-size: 13px;
-  color: #666;
-}
-
-.progress-section {
-  margin-top: 25px;
-}
-
-.progress-info {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-
-.progress-info strong {
-  font-size: 14px;
-}
-
-.progress-bar {
-  height: 12px;
-  background: #e9e9ef;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  background: #667eea;
-  border-radius: 10px;
-  transition: width 0.3s ease;
-}
-
-.progress-section > p {
-  color: #777;
-  font-size: 13px;
-  margin-top: 8px;
-}
-
-.portions {
-  margin-top: 25px;
-  border-top: 1px solid #eee;
-  padding-top: 20px;
-}
-
-.portions h3 {
-  margin-bottom: 15px;
-}
-
-.portion-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.portion-item:hover {
-  background: #f7f8ff;
-}
-
-.portion-item input {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-}
-
-.portion-item span {
-  font-size: 15px;
-}
-
-.portion-item span.completed {
-  text-decoration: line-through;
-  color: #999;
-}
-
-@media (max-width: 700px) {
-  .tracker-page {
-    padding: 20px;
-  }
-
-  .subject-top {
-    align-items: flex-start;
-    gap: 15px;
-  }
-
-  .days-left {
-    padding: 10px 14px;
-  }
-
-  .tracker-header {
-  flex-direction: column;
-  align-items: flex-start;
-  }
-
-  .next-exam-card {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-}
-
-.next-exam-days {
-  width: 100%;
-  box-sizing: border-box;
-}
-}
-
-.add-exam-button {
-  padding: 13px 20px;
+.back-button {
+  margin-bottom: 12px;
+  padding: 0;
   border: none;
-  border-radius: 12px;
-  background: #667eea;
-  color: white;
-  font-size: 15px;
+  background: none;
+  color: #166534;
+  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
 }
 
-.add-exam-button:hover {
-  opacity: 0.9;
+.back-button:hover {
+  color: #22c55e;
+  text-decoration: underline;
+}
+
+.add-exam-button,
+.portion-input button,
+.form-buttons button:last-child {
+  border: none;
+  background: #22c55e;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-exam-button {
+  padding: 13px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.add-exam-button:hover,
+.portion-input button:hover,
+.form-buttons button:last-child:hover {
+  background: #16a34a;
+}
+
+.add-exam-form,
+.timetable-section,
+.next-exam-card,
+.subject-card {
+  background: white;
+  border: 1px solid #dcfce7;
+  box-shadow: 0 4px 16px rgba(22, 101, 52, 0.06);
 }
 
 .add-exam-form {
-  background: white;
-  padding: 25px;
-  border-radius: 18px;
-  border: 2px solid #eef0ff;
   margin-bottom: 30px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  border-radius: 16px;
 }
 
-.add-exam-form h2 {
+.add-exam-form h2,
+.timetable-section h2,
+.next-exam-card h2,
+.subject-top h2 {
+  color: #166534;
+}
+
+.add-exam-form h2,
+.timetable-section h2 {
   margin-top: 0;
   margin-bottom: 20px;
 }
@@ -205,16 +92,24 @@
   display: block;
   margin-top: 15px;
   margin-bottom: 6px;
+  color: #166534;
   font-weight: bold;
 }
 
 .add-exam-form input {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  color: #16351f;
   font-size: 15px;
   box-sizing: border-box;
+}
+
+.add-exam-form input:focus {
+  outline: none;
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px #dcfce7;
 }
 
 .portion-input {
@@ -224,12 +119,7 @@
 
 .portion-input button {
   padding: 0 18px;
-  border: none;
-  border-radius: 10px;
-  background: #667eea;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
+  border-radius: 8px;
 }
 
 .new-portions {
@@ -237,10 +127,10 @@
 }
 
 .new-portions div {
-  padding: 8px 12px;
-  background: #f7f8ff;
-  border-radius: 8px;
   margin-top: 6px;
+  padding: 8px 12px;
+  background: #f0fdf4;
+  border-radius: 8px;
 }
 
 .form-buttons {
@@ -253,28 +143,15 @@
 .form-buttons button {
   padding: 11px 20px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
 }
 
-.form-buttons button:last-child {
-  background: #667eea;
-  color: white;
-}
-
 .timetable-section {
-  background: white;
-  border-radius: 20px;
-  padding: 25px;
   margin-bottom: 30px;
-  border: 2px solid #eef0ff;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
-}
-
-.timetable-section h2 {
-  margin-top: 0;
-  margin-bottom: 20px;
+  padding: 25px;
+  border-radius: 16px;
 }
 
 .timetable-list {
@@ -288,52 +165,36 @@
   align-items: center;
   gap: 20px;
   padding: 14px;
-  border-radius: 12px;
-  background: #f8f9ff;
+  background: #f0fdf4;
+  border-radius: 10px;
 }
 
 .timetable-date {
   min-width: 80px;
+  color: #166534;
   font-size: 16px;
+  font-weight: bold;
 }
 
 .timetable-subject {
+  color: #16351f;
   font-size: 16px;
   font-weight: 500;
 }
 
-.back-button {
-  background: none;
-  border: none;
-  padding: 0;
-  margin-bottom: 12px;
-  color: #667eea;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.back-button:hover {
-  text-decoration: underline;
-}
-
 .next-exam-card {
-  background: white;
-  border-radius: 20px;
-  padding: 25px;
-  margin-bottom: 30px;
-  border: 2px solid #eef0ff;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 30px;
+  padding: 25px;
+  border-radius: 16px;
 }
 
 .next-exam-label {
+  color: #16a34a;
   font-size: 13px;
   font-weight: bold;
-  color: #667eea;
   letter-spacing: 1px;
 }
 
@@ -342,24 +203,176 @@
   font-size: 25px;
 }
 
-.next-exam-card p {
+.next-exam-card p,
+.subject-top p,
+.progress-section > p {
   margin: 0;
-  color: #777;
+  color: #6b7280;
+}
+
+.next-exam-days,
+.days-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #dcfce7;
+  border-radius: 12px;
 }
 
 .next-exam-days {
-  text-align: center;
-  background: #f0f2ff;
   padding: 15px 25px;
-  border-radius: 15px;
+  text-align: center;
 }
 
 .next-exam-days strong {
   display: block;
+  color: #166534;
   font-size: 32px;
 }
 
-.next-exam-days span {
-  color: #666;
+.next-exam-days span,
+.days-left span {
+  color: #166534;
   font-size: 13px;
+}
+
+.subjects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.subject-card {
+  padding: 28px;
+  border-radius: 16px;
+}
+
+.subject-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subject-top h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+}
+
+.days-left {
+  padding: 12px 20px;
+}
+
+.days-left strong {
+  color: #166534;
+  font-size: 28px;
+}
+
+.progress-section {
+  margin-top: 25px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.progress-info strong {
+  color: #166534;
+  font-size: 14px;
+}
+
+.progress-bar {
+  height: 12px;
+  overflow: hidden;
+  background: #dcfce7;
+  border-radius: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #22c55e;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+.progress-section > p {
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.portions {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #dcfce7;
+}
+
+.portions h3 {
+  margin-bottom: 15px;
+  color: #166534;
+}
+
+.portion-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.portion-item:hover {
+  background: #f0fdf4;
+}
+
+.portion-item input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #22c55e;
+}
+
+.portion-item span {
+  font-size: 15px;
+}
+
+.portion-item span.completed {
+  color: #6b7280;
+  text-decoration: line-through;
+}
+
+@media (max-width: 700px) {
+  .tracker-page {
+    padding: 24px 16px;
+  }
+
+  .tracker-header,
+  .next-exam-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .subject-top {
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .days-left {
+    padding: 10px 14px;
+  }
+
+  .next-exam-card {
+    gap: 20px;
+  }
+
+  .next-exam-days {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .timetable-item {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
 }

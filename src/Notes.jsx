@@ -264,38 +264,40 @@ function previousFlashcard() {
   }
 }
   return (
-    <div className="notes-page">
+  <div className="notes-page">
+    <div className="notes-container">
+      <div className="notes-topbar">
+        <button className="back-button" onClick={onBack}>
+          ← Back to dashboard
+        </button>
 
-      <button
-  className="back-button"
-  onClick={onBack}
->
-  ← Dashboard
-</button>
-
-      <div className="notes-header">
-        <h1>📚 Smart Notes</h1>
-
-        <p>
-          Turn your notes into smarter study material.
-        </p>
+        <span className="notes-status">
+          <span className="status-dot" />
+          Study workspace
+        </span>
       </div>
 
-      <div className="upload-card">
-
-        <div className="upload-icon">
-          📸
+      <header className="notes-header">
+        <div>
+          <p className="section-label">SMART NOTES</p>
+          <h1>Turn notes into a study plan.</h1>
+          <p>
+            Upload a clear image, extract its text, and create revision
+            material in a few clicks.
+          </p>
         </div>
 
-        <h2>Upload your notes</h2>
+        <div className="header-icon">📚</div>
+      </header>
 
-        <p>
-          Upload a clear photo of your notes
-        </p>
+      <section className="upload-card">
+        <div className="upload-icon">📷</div>
+        <h2>Upload your notes</h2>
+        <p>Choose a clear image of your handwritten or printed notes.</p>
 
         <label className="upload-button">
-          Choose Image
-
+          <span>Choose image</span>
+          <span>→</span>
           <input
             type="file"
             accept="image/*"
@@ -303,295 +305,238 @@ function previousFlashcard() {
           />
         </label>
 
-        {fileName && (
-          <p className="selected-file">
-            📄 {fileName}
-          </p>
-        )}
+        <p className="upload-help">JPG, PNG, or any clear image file</p>
 
-      </div>
+        {fileName && (
+          <div className="selected-file">
+            <span>📄</span>
+            <span>{fileName}</span>
+          </div>
+        )}
+      </section>
 
       {loading && (
-        <div className="ocr-loading">
-
-          <h2>🔍 Reading your notes...</h2>
-
-          <p>
-            OCR Progress: {progress}%
-          </p>
+        <section className="ocr-loading">
+          <div className="loading-icon">🔍</div>
+          <div>
+            <h2>Reading your notes</h2>
+            <p>Extracting text from your image… {progress}%</p>
+          </div>
 
           <div className="progress-bar">
             <div
               className="progress"
               style={{ width: `${progress}%` }}
-            ></div>
+            />
           </div>
-
-          <p>
-            This may take a little while the first time.
-          </p>
-
-        </div>
+        </section>
       )}
 
       {error && (
         <div className="ocr-error">
-          ⚠️ {error}
+          <span>⚠️</span>
+          {error}
         </div>
       )}
 
       {image && !loading && !error && text && (
-        <div className="result-section">
-
+        <section className="result-section">
           <div className="image-preview">
+            <div className="result-title">
+              <span>📷</span>
+              <h2>Your uploaded note</h2>
+            </div>
 
-            <h2>📷 Your Note</h2>
-
-            <img
-              src={image}
-              alt="Uploaded note"
-            />
-
+            <img src={image} alt="Uploaded note" />
           </div>
 
           <div className="text-result">
+            <div className="result-title">
+              <span>📝</span>
+              <h2>Extracted text</h2>
+            </div>
 
-  <h2>📝 Extracted Text</h2>
+            <textarea value={text} readOnly />
 
-  <textarea
-    value={text}
-    readOnly
-  />
+            <div className="study-actions">
+              <div>
+                <p className="section-label">NEXT STEP</p>
+                <h3>Create study material</h3>
+              </div>
 
-  <div className="study-actions">
+              <div className="action-buttons">
+                <button onClick={generateSummary}>
+                  <span>📖</span>
+                  Summary
+                </button>
 
-    <h3>✨ Create Study Material</h3>
+                <button onClick={generateFlashcards}>
+                  <span>🃏</span>
+                  Flashcards
+                </button>
 
-    <div className="action-buttons">
-
-      <button onClick={generateSummary}>
-         📖 Summary
-      </button>
-
-      <button onClick={generateFlashcards}>
-        🃏 Flashcards
-      </button>
-
-      <button onClick={generateQuiz}>
-  📝 Quiz
-</button>
-
-    </div>
-
-  </div>
-  {generatingSummary && (
-  <div className="ai-result">
-    <h2>🤖 Creating your study notes...</h2>
-    <p>Gemini is reading your notes.</p>
-  </div>
-)}
-
-{summary && (
-  <div className="ai-result">
-    <h2>📖 AI Study Notes</h2>
-
-    <div className="summary-text">
-      {summary}
-    </div>
-  </div>
-)}
-{generatingFlashcards && (
-  <div className="ai-result">
-    <h2>🃏 Creating flashcards...</h2>
-    <p>Gemini is turning your notes into questions.</p>
-  </div>
-)}
-
-{Array.isArray(flashcards) && flashcards.length > 0 && (
-  <div className="flashcards-container">
-
-    <h2>🃏 Your Flashcards</h2>
-
-    <p className="flashcard-counter">
-      Card {currentFlashcard + 1} of {flashcards.length}
-    </p>
-
-    <div
-      className="flashcard-single"
-      onClick={flipFlashcard}
-    >
-
-      {!showAnswer ? (
-        <div className="flashcard-face">
-
-          <span className="flashcard-label">
-            QUESTION
-          </span>
-
-          <h3>
-            {flashcards[currentFlashcard].question}
-          </h3>
-
-          <p className="flip-hint">
-            👆 Click to reveal answer
-          </p>
-
-        </div>
-      ) : (
-        <div className="flashcard-face">
-
-          <span className="flashcard-label">
-            ANSWER
-          </span>
-
-          <p className="flashcard-answer-text">
-            {flashcards[currentFlashcard].answer}
-          </p>
-
-          <p className="flip-hint">
-            👆 Click to see question
-          </p>
-
-        </div>
+                <button onClick={generateQuiz}>
+                  <span>📝</span>
+                  Quiz
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
       )}
 
+      <div className="study-output">
+        {generatingSummary && (
+          <div className="ai-result">
+            <h2>📖 Creating your summary…</h2>
+            <p>Please wait while your notes are being organized.</p>
+          </div>
+        )}
+
+        {summary && (
+          <div className="ai-result">
+            <p className="section-label">STUDY SUMMARY</p>
+            <h2>Key points from your notes</h2>
+            <div className="summary-text">{summary}</div>
+          </div>
+        )}
+
+        {generatingFlashcards && (
+          <div className="ai-result">
+            <h2>🃏 Creating your flashcards…</h2>
+            <p>Making quick questions to help you revise.</p>
+          </div>
+        )}
+
+        {Array.isArray(flashcards) && flashcards.length > 0 && (
+          <div className="flashcards-container">
+            <p className="section-label">FLASHCARDS</p>
+            <h2>Practice one card at a time</h2>
+
+            <p className="flashcard-counter">
+              Card {currentFlashcard + 1} of {flashcards.length}
+            </p>
+
+            <div
+              className="flashcard-single"
+              onClick={flipFlashcard}
+              role="button"
+              tabIndex="0"
+            >
+              {!showAnswer ? (
+                <div className="flashcard-face">
+                  <span className="flashcard-label">QUESTION</span>
+                  <h3>{flashcards[currentFlashcard].question}</h3>
+                  <p className="flip-hint">Click the card to reveal the answer</p>
+                </div>
+              ) : (
+                <div className="flashcard-face">
+                  <span className="flashcard-label">ANSWER</span>
+                  <p className="flashcard-answer-text">
+                    {flashcards[currentFlashcard].answer}
+                  </p>
+                  <p className="flip-hint">Click the card to see the question</p>
+                </div>
+              )}
+            </div>
+
+            <div className="flashcard-navigation">
+              <button
+                onClick={previousFlashcard}
+                disabled={currentFlashcard === 0}
+              >
+                ← Previous
+              </button>
+
+              <button
+                onClick={nextFlashcard}
+                disabled={currentFlashcard === flashcards.length - 1}
+              >
+                Next →
+              </button>
+            </div>
+          </div>
+        )}
+
+        {generatingQuiz && (
+          <div className="ai-result">
+            <h2>📝 Creating your quiz…</h2>
+            <p>Preparing questions from your notes.</p>
+          </div>
+        )}
+
+        {Array.isArray(quiz) &&
+          quiz.length > 0 &&
+          quiz[currentQuestion] &&
+          Array.isArray(quiz[currentQuestion].options) &&
+          !quizFinished && (
+            <div className="interactive-quiz">
+              <div className="quiz-header">
+                <div>
+                  <p className="section-label">QUICK QUIZ</p>
+                  <h2>Test your understanding</h2>
+                </div>
+
+                <p>
+                  {currentQuestion + 1} / {quiz.length}
+                </p>
+              </div>
+
+              <h3>{quiz[currentQuestion].question}</h3>
+
+              <div className="quiz-options">
+                {quiz[currentQuestion].options.map((option, index) => (
+                  <button
+                    key={index}
+                    className={
+                      selectedAnswer === index
+                        ? "quiz-option selected"
+                        : "quiz-option"
+                    }
+                    onClick={() => selectAnswer(index)}
+                  >
+                    <span>{String.fromCharCode(65 + index)}</span>
+                    {option}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                className="next-question"
+                onClick={nextQuestion}
+                disabled={selectedAnswer === null}
+              >
+                {currentQuestion === quiz.length - 1
+                  ? "Finish quiz"
+                  : "Next question →"}
+              </button>
+            </div>
+          )}
+
+        {quizFinished && Array.isArray(quiz) && quiz.length > 0 && (
+          <div className="quiz-result">
+            <div className="result-icon">🎉</div>
+            <p className="section-label">QUIZ COMPLETE</p>
+            <h2>Nice work!</h2>
+
+            <div className="score">
+              {score} / {quiz.length}
+            </div>
+
+            <p>
+              You scored{" "}
+              <strong>{Math.round((score / quiz.length) * 100)}%</strong>
+            </p>
+
+            <button className="next-question" onClick={restartQuiz}>
+              Try again
+            </button>
+          </div>
+        )}
+      </div>
     </div>
-
-    <div className="flashcard-navigation">
-
-      <button
-        onClick={previousFlashcard}
-        disabled={currentFlashcard === 0}
-      >
-        ← Previous
-      </button>
-
-      <button
-        onClick={nextFlashcard}
-        disabled={
-          currentFlashcard === flashcards.length - 1
-        }
-      >
-        Next →
-      </button>
-
-    </div>
-
   </div>
-)}
-
-{generatingQuiz && (
-  <div className="ai-result">
-    <h2>📝 Creating your quiz...</h2>
-    <p>Gemini is preparing questions from your notes.</p>
-  </div>
-)}
-
-{Array.isArray(quiz) &&
-  quiz.length > 0 &&
-  quiz[currentQuestion] &&
-  Array.isArray(quiz[currentQuestion].options) &&
-  !quizFinished && (
-  <div className="interactive-quiz">
-
-    <div className="quiz-header">
-
-      <h2>📝 Science Quiz</h2>
-
-      <p>
-        Question {currentQuestion + 1} of {quiz.length}
-      </p>
-
-    </div>
-
-    <h3>
-      {quiz[currentQuestion].question}
-    </h3>
-
-    <div className="quiz-options">
-
-      {quiz[currentQuestion].options.map(
-        (option, index) => (
-
-          <button
-            key={index}
-            className={
-              selectedAnswer === index
-                ? "quiz-option selected"
-                : "quiz-option"
-            }
-            onClick={() => selectAnswer(index)}
-          >
-            <span>
-              {String.fromCharCode(65 + index)}.
-            </span>
-
-            {option}
-
-          </button>
-
-        )
-      )}
-
-    </div>
-
-    <button
-      className="next-question"
-      onClick={nextQuestion}
-      disabled={selectedAnswer === null}
-    >
-      {currentQuestion === quiz.length - 1
-        ? "Finish Quiz"
-        : "Next Question →"}
-    </button>
-
-  </div>
-)}
-
-{quizFinished && Array.isArray(quiz) && quiz.length > 0 && (
-  <div className="quiz-result">
-
-    <div className="result-icon">
-      🎉
-    </div>
-
-    <h2>Quiz Complete!</h2>
-
-    <div className="score">
-      {score} / {quiz.length}
-    </div>
-
-    <p>
-      You scored{" "}
-      <strong>
-        {Math.round((score / quiz.length) * 100)}%
-      </strong>
-    </p>
-
-    {score === quiz.length ? (
-      <p>🌟 Perfect score! Amazing!</p>
-    ) : score >= 3 ? (
-      <p>👏 Great job! Keep it up!</p>
-    ) : (
-      <p>💪 Keep practicing. You can improve!</p>
-    )}
-
-    <button
-      className="next-question"
-      onClick={restartQuiz}
-    >
-      🔄 Try Again
-    </button>
-
-  </div>
-)}
-</div>
-
-        </div>
-      )}
-
-    </div>
-  );
+);
 }
 
 export default Notes;
